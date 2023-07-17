@@ -16,7 +16,7 @@ namespace HelloWorld
             {
                 StatusLabels();
 
-                SubmitNewPosition();
+                //SubmitNewPosition();
             }
 
             GUILayout.EndArea();
