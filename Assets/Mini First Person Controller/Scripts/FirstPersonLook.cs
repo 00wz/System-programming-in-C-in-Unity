@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using Unity.Netcode;
+using UnityEngine;
 
-public class FirstPersonLook : MonoBehaviour
+public class FirstPersonLook : NetworkBehaviour
 {
     //[SerializeField]
     Transform character;
@@ -10,6 +12,7 @@ public class FirstPersonLook : MonoBehaviour
     Vector2 velocity;
     Vector2 frameVelocity;
 
+    public Action<Vector3,Vector3> OnShoot;
 
     void Reset()
     {
@@ -36,5 +39,10 @@ public class FirstPersonLook : MonoBehaviour
         // Rotate camera up-down and controller left-right from velocity.
         transform.localRotation = Quaternion.AngleAxis(-velocity.y, Vector3.right);
         character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            OnShoot?.Invoke(transform.position, transform.forward);
+        }
     }
 }

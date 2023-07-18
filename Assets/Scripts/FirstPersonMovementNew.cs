@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class FirstPersonMovementNew : MonoBehaviour
@@ -16,7 +17,7 @@ public class FirstPersonMovementNew : MonoBehaviour
         _rigidbody.freezeRotation = true;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         // Get targetVelocity from input.
         Vector2 targetVelocity = new Vector2(Input.GetAxis("Horizontal") * speed,
