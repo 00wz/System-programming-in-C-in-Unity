@@ -15,20 +15,22 @@ public class PlayerSpawner : NetworkBehaviour
             GUILayout.BeginArea(new Rect(10, 310, 300, 300));
             if (GUILayout.Button("Spawn"))
             {
-                Spawn();
+                SpawnServerRpc();
                 isInstantiated = true;
             }
             GUILayout.EndArea();
         }
     }
-    private void Spawn()
+
+    [ServerRpc]
+    private void SpawnServerRpc()
     {
         // Only the server spawns, clients will disable this component on their side
-        enabled = IsServer;
+        /*enabled = IsServer;
         if (!enabled || PrefabToSpawn == null)
         {
             return;
-        }
+        }*/
         // Instantiate the GameObject Instance
         m_PrefabInstance = Instantiate(PrefabToSpawn);
         /*

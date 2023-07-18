@@ -2,7 +2,7 @@
 
 public class FirstPersonLook : MonoBehaviour
 {
-    [SerializeField]
+    //[SerializeField]
     Transform character;
     public float sensitivity = 2;
     public float smoothing = 1.5f;
@@ -21,6 +21,7 @@ public class FirstPersonLook : MonoBehaviour
     {
         // Lock the mouse cursor to the game screen.
         Cursor.lockState = CursorLockMode.Locked;
+        character = transform.parent;
     }
 
     void Update()
