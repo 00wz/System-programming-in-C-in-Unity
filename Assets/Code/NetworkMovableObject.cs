@@ -1,18 +1,82 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using Unity.Netcode;
 using UnityEngine;
 
-public class NetworkMovableObject : MonoBehaviour
+namespace Network
 {
-    // Start is called before the first frame update
-    void Start()
+    public abstract class NetworkMovableObject : NetworkBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        protected abstract float _speed { get; }
+        protected Action _onUpdateAction { get; set; }
+        protected Action _onFixedUpdateAction { get; set; }
+        protected Action _onLateUpdateAction { get; set; }
+        protected Action _onPreRenderActionAction { get; set; }
+        protected Action _onPostRenderAction { get; set; }
+        /*
+        [SyncVar] protected Vector3 _serverPosition;
+        [SyncVar] protected Vector3 _serverEuler;
+        */
+        protected NetworkVariable<Vector3> _serverPosition;
+        protected NetworkVariable<Vector3> _serverEuler;
+        public override void OnGainedOwnership()
+        {
+            Initiate();
+        }
+        protected virtual void Initiate(UpdatePhase updatePhase =
+        UpdatePhase.Update)
+        {
+            switch (updatePhase)
+            {
+                case UpdatePhase.Update:
+                    _onUpdateAction += Movement;
+                    break;
+                case UpdatePhase.FixedUpdate:
+                    _onFixedUpdateAction += Movement;
+                    break;
+                case UpdatePhase.LateUpdate:
+                    _onLateUpdateAction += Movement;
+                    break;
+                case UpdatePhase.PostRender:
+                    _onPostRenderAction += Movement;
+                    break;
+                case UpdatePhase.PreRender:
+                    _onPreRenderActionAction += Movement;
+                    break;
+            }
+        }
+        private void Update()
+        {
+            _onUpdateAction?.Invoke();
+        }
+        private void LateUpdate()
+        {
+            _onLateUpdateAction?.Invoke();
+        }
+        private void FixedUpdate()
+        {
+            _onFixedUpdateAction?.Invoke();
+        }
+        private void OnPreRender()
+        {
+            _onPreRenderActionAction?.Invoke();
+        }
+        private void OnPostRender()
+        {
+            _onPostRenderAction?.Invoke();
+        }
+        protected virtual void Movement()
+        {
+            if (IsOwner)
+            {
+                HasAuthorityMovement();
+            }
+            else
+            {
+                FromServerUpdate();
+            }
+        }
+        protected abstract void HasAuthorityMovement();
+        protected abstract void FromServerUpdate();
+        protected abstract void SendToServer();
     }
 }

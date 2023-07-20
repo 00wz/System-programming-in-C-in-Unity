@@ -253,6 +253,7 @@ GameObject:
   - component: {fileID: 1087564853}
   - component: {fileID: 1087564852}
   - component: {fileID: 1087564851}
+  - component: {fileID: 1087564854}
   m_Layer: 0
   m_Name: Jupiter
   m_TagString: Untagged
@@ -338,6 +339,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087564849}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1087564854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087564849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd4ae81825c22d048a6f214bdca51427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aroundPoint: {fileID: 2102271696}
+  _smoothTime: 0.3
+  _circleInSecond: 1
+  _offsetSin: 1
+  _offsetCos: 1
+  _rotationSpeed: 0
 --- !u!1 &1140374329
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,6 +367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1140374331}
   - component: {fileID: 1140374330}
+  - component: {fileID: 1140374332}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -383,6 +403,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1140374332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140374329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28cc1aa6374ffeb4783cf7923b3bdcf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1615070905
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,6 +521,8 @@ GameObject:
   - component: {fileID: 2070500332}
   - component: {fileID: 2070500331}
   - component: {fileID: 2070500330}
+  - component: {fileID: 2070500334}
+  - component: {fileID: 2070500333}
   m_Layer: 0
   m_Name: Earth
   m_TagString: Untagged
@@ -574,6 +608,40 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2070500328}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2070500333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070500328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 902112010
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &2070500334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070500328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd4ae81825c22d048a6f214bdca51427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aroundPoint: {fileID: 2102271696}
+  _smoothTime: 0.3
+  _circleInSecond: 1
+  _offsetSin: 1
+  _offsetCos: 1
+  _rotationSpeed: 0
 --- !u!1 &2102271695
 GameObject:
   m_ObjectHideFlags: 0
