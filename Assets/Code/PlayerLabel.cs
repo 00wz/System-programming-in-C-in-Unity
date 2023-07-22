@@ -32,7 +32,8 @@ namespace UI
         private bool IsVisible(Vector3 position)
         {
             return position.x > 0 && position.x < Screen.width &&
-                position.y > 0 && position.y < Screen.height;
+                position.y > 0 && position.y < Screen.height&&
+                position.z>0;
         }
     }
 }

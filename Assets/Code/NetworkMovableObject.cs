@@ -16,10 +16,11 @@ namespace Network
         [SyncVar] protected Vector3 _serverPosition;
         [SyncVar] protected Vector3 _serverEuler;
         */
-        protected NetworkVariable<Vector3> _serverPosition;
-        protected NetworkVariable<Vector3> _serverEuler;
-        public override void OnGainedOwnership()
+        protected NetworkVariable<Vector3> _serverPosition= new NetworkVariable<Vector3>();
+        protected NetworkVariable<Vector3> _serverEuler = new NetworkVariable<Vector3>();
+        public override void OnNetworkSpawn()
         {
+            Debug.Log("OnNetworkSpawn() " + gameObject.name);
             Initiate();
         }
         protected virtual void Initiate(UpdatePhase updatePhase =
@@ -68,15 +69,27 @@ namespace Network
         {
             if (IsOwner)
             {
+                //Debug.Log("isOwner movement "+gameObject.name);
                 HasAuthorityMovement();
             }
             else
             {
+                //Debug.Log("another movement "+ gameObject.name);
                 FromServerUpdate();
             }
         }
         protected abstract void HasAuthorityMovement();
         protected abstract void FromServerUpdate();
         protected abstract void SendToServer();
+
+        public override void OnDestroy()
+        {
+            _onUpdateAction = null;
+            _onFixedUpdateAction = null;
+            _onLateUpdateAction = null;
+            _onPreRenderActionAction = null;
+            _onPostRenderAction = null;
+            base.OnDestroy();
+    }
     }
 }

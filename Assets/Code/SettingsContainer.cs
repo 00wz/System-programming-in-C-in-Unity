@@ -6,5 +6,7 @@ namespace Main
     {
         public SpaceShipSettings SpaceShipSettings => _spaceShipSettings;
         [SerializeField] private SpaceShipSettings _spaceShipSettings;
+        public OtherSettings OtherSettings => _otherSettings;
+        [SerializeField] private OtherSettings _otherSettings;
     }
 }

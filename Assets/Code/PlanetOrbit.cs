@@ -16,20 +16,24 @@ namespace Mechanics
         private Vector3 _currentPositionSmoothVelocity;
         private float _currentRotationAngle;
         private const float _circleRadians = Mathf.PI * 2; 
-        private void Start()
+        public override void OnNetworkSpawn()
         {
+            base.OnNetworkSpawn();
             if (IsServer)
             {
                 _dist = (transform.position - _aroundPoint.position).magnitude;
+                //Debug.Log("_dist= " + _dist);
             }
-            Initiate(UpdatePhase.FixedUpdate);
+            //Initiate(UpdatePhase.FixedUpdate);
         }
         protected override void HasAuthorityMovement()
         {
+            //Debug.Log("HasAuthorityMovement before " + gameObject.name);
             if (!IsServer)
             {
                 return;
             }
+            //Debug.Log("HasAuthorityMovement after " + gameObject.name);
             var p = _aroundPoint.position;
             p.x += Mathf.Sin(_currentAng) * _dist * _offsetSin;
             p.z += Mathf.Cos(_currentAng) * _dist * _offsetCos;

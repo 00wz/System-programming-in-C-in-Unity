@@ -1,13 +1,12 @@
+using Characters;
+using Data;
 using System;
 using Unity.Netcode;
-using Unity.Networking.Transport;
 using UnityEngine;
 namespace Main
 {
     public class SolarSystemNetworkManager : NetworkManager,IDisposable
     {
-        [SerializeField] private string _playerName;
-
         public void Dispose()
         {
             OnClientConnectedCallback -= OnServerAddPlayer;
@@ -19,9 +18,14 @@ namespace Main
         }
         private void OnServerAddPlayer(ulong playerControllerId)
         {
+            if (!IsServer) return;
             var player = SpawnManager.GetPlayerNetworkObject(playerControllerId);
 
-            player.GetComponent<ShipController>().PlayerName = _playerName;
+            var spawnPoint = SettingsContainer.Instance?.OtherSettings.spawnsPoints[0];
+            if (spawnPoint != null)
+                player.transform.position = spawnPoint.position;
+            player.GetComponent<ShipController>().PlayerName = 
+                SettingsContainer.Instance?.OtherSettings._playerName;
         }
     }
 }
