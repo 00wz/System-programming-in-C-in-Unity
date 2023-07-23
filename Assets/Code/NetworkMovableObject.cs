@@ -20,7 +20,8 @@ namespace Network
         protected NetworkVariable<Vector3> _serverEuler = new NetworkVariable<Vector3>();
         public override void OnNetworkSpawn()
         {
-            Debug.Log("OnNetworkSpawn() " + gameObject.name);
+            base.OnNetworkSpawn();
+            //Debug.Log("OnNetworkSpawn() " + gameObject.name);
             Initiate();
         }
         protected virtual void Initiate(UpdatePhase updatePhase =

@@ -18,14 +18,14 @@ namespace Main
         }
         private void OnServerAddPlayer(ulong playerControllerId)
         {
-            if (!IsServer) return;
+            if (!IsConnectedClient) return;
             var player = SpawnManager.GetPlayerNetworkObject(playerControllerId);
 
             var spawnPoint = SettingsContainer.Instance?.OtherSettings.spawnsPoints[0];
             if (spawnPoint != null)
                 player.transform.position = spawnPoint.position;
-            player.GetComponent<ShipController>().PlayerName = 
-                SettingsContainer.Instance?.OtherSettings._playerName;
+            /*player.GetComponent<ShipController>().PlayerName = 
+                SettingsContainer.Instance?.OtherSettings._playerName;*/
         }
     }
 }
