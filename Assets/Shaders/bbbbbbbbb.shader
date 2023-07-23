@@ -6,7 +6,7 @@ Shader "Custom/bbbbbbbbb"
         _Tex2 ("Texture2", 2D) = "white" {}
         _MixValue("MixValue", Range(0,1)) = 0.5
         _Color("Main Color", COLOR) = (1,1,1,1)
-        _Height("Height", Range(0,2)) = 0.5 // сила изгиба
+        _Height("Height", Range(0,10)) = 0.5 // сила изгиба
 
     }
     SubShader{
@@ -34,6 +34,8 @@ Shader "Custom/bbbbbbbbb"
             {
                 float2 uv : TEXCOORD0; // UV-координаты вершины
                 float4 vertex : SV_POSITION; // координаты вершины
+                float RdotV: TEXCOORD1;
+
             };
 
             //здесь происходит обработка вершин
@@ -47,7 +49,7 @@ Shader "Custom/bbbbbbbbb"
                 float4 worldPos = mul(unity_ObjectToWorld, v.vertex);
                 // Camera direction
                 float3 viewDir = normalize(UnityWorldSpaceViewDir(worldPos.xyz));
-                float RdotV = max(0., dot(worldNormal, viewDir));
+                result.RdotV = dot(worldNormal, viewDir);
 
                 result.vertex = UnityObjectToClipPos(v.vertex);
                 result.uv = TRANSFORM_TEX(v.texcoord, _Tex1);
@@ -61,7 +63,8 @@ Shader "Custom/bbbbbbbbb"
                 color = tex2D(_Tex1, i.uv) * _MixValue;
                 color += tex2D(_Tex2, i.uv) * (1 - _MixValue);
                 color = color * _Color;
-                color.w*=_Height;
+                color.w=i.RdotV*i.RdotV;
+                //color.w=_Height;
                 return color;
             }
             ENDCG
