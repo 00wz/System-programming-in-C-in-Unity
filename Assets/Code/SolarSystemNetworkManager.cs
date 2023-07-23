@@ -18,7 +18,7 @@ namespace Main
         }
         private void OnServerAddPlayer(ulong playerControllerId)
         {
-            if (!IsConnectedClient) return;
+            if (this.LocalClientId!=playerControllerId) return;
             var player = SpawnManager.GetPlayerNetworkObject(playerControllerId);
 
             var spawnPoint = SettingsContainer.Instance?.OtherSettings.spawnsPoints[0];

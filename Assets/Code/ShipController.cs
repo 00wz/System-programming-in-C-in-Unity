@@ -41,10 +41,10 @@ namespace Characters
         {
             gameObject.name = _playerName.Value.ToString();
         }*/
-        /*private void Awake()
+        private void Awake()
         {
             _playerName.OnValueChanged += ChangeName;
-        }*/
+        }
 
         public override void OnNetworkSpawn()
         {
