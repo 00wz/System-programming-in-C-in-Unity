@@ -1,4 +1,4 @@
-Shader "Custom/UnlitTextureMix"
+Shader "Custom/bbbbbbbbb"
 {
     Properties
     {
@@ -17,8 +17,7 @@ Shader "Custom/UnlitTextureMix"
 				ZWrite Off// Закрыть zwrite.
 			Blend SrcAlpha OneMinusSrcAlpha// Укажите смешанную функцию
             CGPROGRAM
-// Upgrade NOTE: excluded shader from DX11; has structs without semantics (struct v2f members RdotV)
-#pragma exclude_renderers d3d11
+
             #pragma vertex vert // директива для обработки вершин
             #pragma fragment frag // директива для обработки фрагментов
             #include "UnityCG.cginc" // библиотека с полезными функциями
