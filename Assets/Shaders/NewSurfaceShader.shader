@@ -39,8 +39,8 @@ Shader "Custom/UnlitTextureMix"
             v2f vert (appdata_full v)
             {
                 v2f result;
-                v.vertex.xyz -= (v.normal * _Height * v.vertex.x * v.vertex.x)+
-                                    (v.normal * _Height *v.vertex.z * v.vertex.z);
+                v.vertex.xyz -= 
+                    v.normal * _Height * (v.vertex.x * v.vertex.x+v.vertex.z * v.vertex.z);
                 result.vertex = UnityObjectToClipPos(v.vertex);
                 result.uv = TRANSFORM_TEX(v.texcoord, _Tex1);
                 return result;
