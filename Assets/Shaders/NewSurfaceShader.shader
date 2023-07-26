@@ -6,7 +6,7 @@ Shader "Custom/UnlitTextureMix"
         _Tex2 ("Texture2", 2D) = "white" {}
         _MixValue("MixValue", Range(0,1)) = 0.5
         _Color("Main Color", COLOR) = (1,1,1,1)
-        _Height("Height", Range(0,20)) = 0.5 // сила изгиба
+        _Height("Height", Range(0,2)) = 0.5 // сила изгиба
 
     }
     SubShader
@@ -39,7 +39,8 @@ Shader "Custom/UnlitTextureMix"
             v2f vert (appdata_full v)
             {
                 v2f result;
-                v.vertex.xyz -= v.normal * _Height * v.vertex.x * v.vertex.x;
+                v.vertex.xyz -= 
+                    v.normal * _Height * (v.vertex.x * v.vertex.x+v.vertex.z * v.vertex.z);
                 result.vertex = UnityObjectToClipPos(v.vertex);
                 result.uv = TRANSFORM_TEX(v.texcoord, _Tex1);
                 return result;
